@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<typedef name="activeEnum" class='com.travel.model.common.StringValuedEnumType'>
+		<param name="enumClassName">com.ems.model.common.BooleanEnum</param>
+	</typedef>
+	<typedef name="deletedEnum" class='com.travel.model.common.StringValuedEnumType'>
+		<param name="enumClassName">com.ems.model.common.BooleanEnum</param>
+	</typedef>
+
+    <class name="com.travel.model.User" table="app_user" >
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        <version name="version" column="version" type="long" access="property" unsaved-value="negative"/>
+        <many-to-one name="role" class="com.travel.model.Role" fetch="join">
+            <column name="role_id" />
+        </many-to-one>
+        <property name="userName" type="java.lang.String" update="false">
+            <column name="username" length="20" not-null="true" unique="true"/>
+        </property>        
+        <property name="password" type="java.lang.String">
+            <column name="password" length="50" not-null="true" />
+        </property>
+        <property name="firstName" type="java.lang.String" update="false">
+            <column name="firstname" length="50" not-null="true" />
+        </property>
+        <property name="middleName" type="java.lang.String" update="false">
+            <column name="middlename" length="50" />
+        </property>
+        <property name="lastName" type="java.lang.String" update="false">
+            <column name="lastname" length="50" />
+        </property>
+        <property name="isactive"  type="yes_no">
+            <column name="isactive" not-null="true" />
+        </property>        
+        <property name="email" type="java.lang.String">
+            <column name="email" length="50" />
+        </property>
+        <property name="lastLoginTime" type="java.util.Date">
+            <column name="last_login_time"/>
+        </property>
+        <property name="creationDate" type="java.util.Date" update="false">
+            <column name="creation_date" not-null="true" />
+        </property>
+        <property name="modificationDate" type="java.util.Date">
+            <column name="modification_date" not-null="true" />
+        </property>		
+    </class>
+    
+	<query name="user.getUserByUserName">
+		<![CDATA[from com.travel.model.User user
+		where user.userName=:userName]]>
+	</query>
+	
+	<query name="user.getAuthenticatedUser">
+		<![CDATA[from com.travel.model.User user
+		where user.userName=:userName and user.password=:password]]>
+	</query>
+	
+</hibernate-mapping>

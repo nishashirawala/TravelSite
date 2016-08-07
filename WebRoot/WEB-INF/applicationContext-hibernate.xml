@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor" />
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>oracle.jdbc.OracleDriver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:oracle:thin:@localhost:1521:XE</value>
+		</property>
+		<property name="user">
+			<value>traveloperator</value>
+		</property>
+		<property name="password">
+			<value>test</value>
+		</property>
+		<property name="acquireIncrement" value="2"></property>
+		<property name="maxPoolSize" value="10"></property>
+		<property name="minPoolSize" value="4"></property>
+		<property name="numHelperThreads" value="3"></property>
+		<property name="maxConnectionAge" value="500"></property>
+	</bean>
+	<!-- Start : Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>com/travel/model/hbm/User.hbm.xml</value>
+				<value>com/travel/model/hbm/Role.hbm.xml</value>
+				<value>com/travel/model/hbm/Hotel_Master.hbm.xml</value>
+				<value>com/travel/model/hbm/Hotel_Address.hbm.xml</value>
+				<value>com/travel/model/hbm/Hotel_Images.hbm.xml</value>
+				<value>com/travel/model/hbm/Hotel_Facility.hbm.xml</value>
+				<value>com/travel/model/hbm/Hotel_Policy.hbm.xml</value>
+				<value>com/travel/model/hbm/Tour_Destination.hbm.xml</value>
+				<value>com/travel/model/hbm/Tour_Master.hbm.xml</value>
+				<value>com/travel/model/hbm/Tour_Itinerary.hbm.xml</value>
+				<value>com/travel/model/hbm/Tour_Images.hbm.xml</value>
+				<value>com/travel/model/hbm/Tour_Booking_Request.hbm.xml</value>
+				<value>com/travel/model/hbm/Hotel_Booking_Request.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.query.factory_class">${hibernate.query.factory_class}</prop>
+				<prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.connection.release_mode">${hibernate.connection.release_mode}</prop>
+				<prop key="hibernate.c3p0.max_size">${hibernate.c3p0.max_size}</prop>
+				<prop key="hibernate.c3p0.min_size">${hibernate.c3p0.min_size}</prop>
+				<prop key="hibernate.c3p0.timeout">${hibernate.c3p0.timeout}</prop>
+				<prop key="hibernate.c3p0.max_statements">0</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+				<prop key="hibernate.c3p0.acquire_increment">3</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- End : Hibernate SessionFactory -->
+
+	<!-- Start : Custom DAOs -->
+	<bean name="userDAO" class="com.travel.dao.impl.UserDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="hotelMasterDAO" class="com.travel.dao.impl.HotelMasterDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="hotelAddressDAO" class="com.travel.dao.impl.HotelAddressDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="hotelImagesDAO" class="com.travel.dao.impl.HotelImagesDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="hotelFacilityDAO" class="com.travel.dao.impl.HotelFacilityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="hotelPolicyDAO" class="com.travel.dao.impl.HotelPolicyDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="tourDestinationDAO" class="com.travel.dao.impl.TourDestinationDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="tourMasterDAO" class="com.travel.dao.impl.TourMasterDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="tourImagesDAO" class="com.travel.dao.impl.TourImagesDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="tourItineraryDAO" class="com.travel.dao.impl.TourItineraryDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="roleDAO" class="com.travel.dao.impl.RoleDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="tourBookingRequestDAO" class="com.travel.dao.impl.TourBookingRequestDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="hotelBookingRequestDAO" class="com.travel.dao.impl.HotelBookingRequestDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- End : Custom DAOs -->
+
+</beans>

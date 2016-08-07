@@ -1,0 +1,5 @@
+.classpath
+.settings
+.metadata
+WebRoot/WEB-INF/classes/
+WebRoot/images/gray/

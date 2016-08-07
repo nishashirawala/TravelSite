@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.travel.model.TourItinerary" table="Tour_Itinerary" >
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <version name="version" column="version" type="long" access="property" unsaved-value="negative"/>
+        <many-to-one name="tourMaster" class="com.travel.model.TourMaster" fetch="join">
+			<column name="tour_master_id"></column>
+		</many-to-one>
+		 <property name="itineraryDay" type="java.lang.String">
+            <column name="itinerary_day" length="10" not-null="true" />
+        </property>
+        <property name="itineraryTitle" type="java.lang.String">
+            <column name="itinerary_title" length="50" not-null="true" unique="true"/>
+        </property>        
+        <property name="itineraryDescription" type="java.lang.String">
+            <column name="itinerary_description" length="3000" not-null="true" />
+        </property>
+        <property name="creationDate" type="java.util.Date" update="false">
+            <column name="creation_date" not-null="true" />
+        </property>
+        <property name="modificationDate" type="java.util.Date">
+            <column name="modification_date" not-null="true" />
+        </property>		
+    </class>
+  
+	<query name="touritinerary.getItineraryByTourMasterIdAndDay">
+		<![CDATA[from com.travel.model.TourItinerary tourItinerary
+		where tourItinerary.tourMaster.id=:tourMasterId and tourItinerary.itineraryDay=:itineraryDay]]>
+	</query>
+</hibernate-mapping>

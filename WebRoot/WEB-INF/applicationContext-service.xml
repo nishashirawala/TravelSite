@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-beans-3.1.xsd">
+
+	<beans:bean id="txProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<beans:property name="transactionManager" ref="transactionManager" />
+		<beans:property name="transactionAttributes">
+			<beans:props>
+				<beans:prop key="save*">
+					PROPAGATION_REQUIRED
+				</beans:prop>
+				<beans:prop key="delete*">
+					PROPAGATION_REQUIRED
+				</beans:prop>
+				<beans:prop key="*">
+					PROPAGATION_REQUIRED,readOnly
+				</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+	<!-- Start : Custom Services -->
+	<beans:bean id="userService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.UserServiceImpl">
+				<beans:property name="userDAO" ref="userDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="hotelMasterService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.HotelMasterServiceImpl">
+				<beans:property name="hotelMasterDAO" ref="hotelMasterDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="hotelAddressService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.HotelAddressServiceImpl">
+				<beans:property name="hotelAddressDAO" ref="hotelAddressDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="hotelImagesService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.HotelImagesServiceImpl">
+				<beans:property name="hotelImagesDAO" ref="hotelImagesDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="hotelFacilityService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.HotelFacilityServiceImpl">
+				<beans:property name="hotelFacilityDAO" ref="hotelFacilityDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="hotelPolicyService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.HotelPolicyServiceImpl">
+				<beans:property name="hotelPolicyDAO" ref="hotelPolicyDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="tourDestinationService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.TourDestinationServiceImpl">
+				<beans:property name="tourDestinationDAO" ref="tourDestinationDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="tourMasterService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.TourMasterServiceImpl">
+				<beans:property name="tourMasterDAO" ref="tourMasterDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="tourImagesService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.TourImagesServiceImpl">
+				<beans:property name="tourImagesDAO" ref="tourImagesDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="tourItineraryService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.TourItineraryServiceImpl">
+				<beans:property name="tourItineraryDAO" ref="tourItineraryDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="roleService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.RoleServiceImpl">
+				<beans:property name="roleDAO" ref="roleDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="tourBookingRequestService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.TourBookingRequestServiceImpl">
+				<beans:property name="tourBookingRequestDAO" ref="tourBookingRequestDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="hotelBookingRequestService" parent="txProxyTemplate">
+		<beans:property name="target">
+			<beans:bean class="com.travel.service.impl.HotelBookingRequestServiceImpl">
+				<beans:property name="hotelBookingRequestDAO" ref="hotelBookingRequestDAO" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+</beans:beans>

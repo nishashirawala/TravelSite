@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="servicelayer-context"
+		class="org.springframework.context.support.ClassPathXmlApplicationContext">
+		<constructor-arg>
+			<list>
+				<value>/WEB-INF/applicationContext-service.xml</value>
+				<value>/WEB-INF/applicationContext-db.xml</value>
+				<value>/WEB-INF/applicationContext-hibernate.xml</value>
+				<value>/WEB-INF/applicationContext-security.xml</value>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="adminLayout" template="/WEB-INF/jsp/tiles/AdminLayout.jsp">
+		<put-attribute name="headIncludes" value="" />
+		<put-attribute name="header" value="/WEB-INF/jsp/tiles/AdminHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/tiles/empty.html" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/tiles/Footer.jsp" />
+	</definition>
+	<definition name="pageLayout" template="/WEB-INF/jsp/tiles/Layout.jsp">
+		<put-attribute name="title" value="Travel Operator" />
+		<put-attribute name="headIncludes" value="" />
+		<put-attribute name="header" value="/WEB-INF/jsp/tiles/Header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/tiles/empty.html" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/tiles/Footer.jsp" />
+	</definition>
+
+	<definition name="header.def" template="/WEB-INF/jsp/tiles/Header.jsp">
+	</definition>
+
+	<definition name="footer.def" template="/WEB-INF/jsp/tiles/Footer.jsp">
+	</definition>
+
+</tiles-definitions>

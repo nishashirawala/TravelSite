@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.travel.model.HotelMaster" table="Hotel_Master" >
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <version name="version" column="version" type="long" access="property" unsaved-value="negative"/>
+        <property name="hotelName" type="java.lang.String">
+            <column name="hotel_name" length="100" not-null="true" unique="true"/>
+        </property>        
+        <property name="hotelDescription" type="java.lang.String">
+            <column name="hotel_description" length="2000" not-null="true" />
+        </property>
+        <property name="starRating" type="java.lang.String" >
+            <column name="star_rating" length="10" not-null="false" />
+        </property>
+        <property name="hotelType" type="java.lang.String">
+            <column name="hotel_type" length="20" not-null="true"/>
+        </property>
+        <property name="mainImage" type="java.lang.String">
+            <column name="main_image" length="50" not-null="false" />
+        </property>
+        <property name="conditions"  type="java.lang.String">
+            <column name="conditions" length="1000" not-null="true" />
+        </property>        
+        <property name="otherInformation" type="java.lang.String">
+            <column name="other_information" length="2000" />
+        </property>        
+        <property name="creationDate" type="java.util.Date" update="false">
+            <column name="creation_date" not-null="true" />
+        </property>
+        <property name="modificationDate" type="java.util.Date">
+            <column name="modification_date" not-null="true" />
+        </property>		
+        <set name="hotelImages" table="Hotel_Images" inverse="true" lazy="true" fetch="select">
+        	<key>
+        		<column name="id"></column>
+        	</key>
+        	<one-to-many class="com.travel.model.HotelImages"/>
+        </set>
+    </class>
+</hibernate-mapping>

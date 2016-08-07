@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd ">
+
+<struts>
+	<constant name="struts.action.excludePattern" value="/_ah/.*" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<constant name="struts.multipart.maxSize" value="25165824" /> <!-- 25 MB -->
+	<include file="struts-default.xml" />
+
+	<package name="my-default" extends="struts-default">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.travel.interceptor.LoginInterceptor">
+			</interceptor>
+			<interceptor-stack name="loggedUserStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<result name="user-not-admin">\WEB-INF\jsp\Home.jsp</result>
+			<result name="error">\WEB-INF\jsp\GlobalError.jsp</result>
+			<result name="exception">\WEB-INF\jsp\GlobalError.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception" />
+		</global-exception-mappings>
+
+		<action name="login" />
+
+		<action name="homepage" class="com.travel.action.HomePageAction"
+			method="showPopularTours">
+			<result>\WEB-INF\jsp\Home.jsp</result>
+		</action>
+
+		<action name="HotTours" class="com.travel.action.HotToursAction">
+			<result>\WEB-INF\jsp\HotTours.jsp</result>
+		</action>
+
+		<!--  Start : This section is for admin actions -->
+		<action name="AdminHome" class="com.travel.action.AdminHomeAction">
+			<interceptor-ref name="loggedUserStack" />
+			<result name="success">\WEB-INF\jsp\AdminHome.jsp</result>
+		</action>
+
+		<action name="ManageHotels" class="com.travel.action.AdminManageHotelsAction">
+			<interceptor-ref name="loggedUserStack" />
+			<result>\WEB-INF\jsp\AdminManageHotels.jsp</result>
+		</action>
+
+		<action name="AddHotelInformation" class="com.travel.action.AdminManageHotelsAction"
+			method="populatePage">
+			<interceptor-ref name="loggedUserStack" />
+			<result>\WEB-INF\jsp\AdminAddHotels.jsp</result>
+		</action>
+
+		<action name="*InformationForHotel" class="com.travel.action.AdminManageHotelsAction"
+			method="{1}InformationForHotel">
+			<interceptor-ref name="loggedUserStack" />
+			<result>\WEB-INF\jsp\AdminAddHotels.jsp</result>
+			<result name="input">\WEB-INF\jsp\AdminAddHotels.jsp</result>
+		</action>
+
+
+		<action name="ImageUploadAction" class="com.travel.action.AdminManageHotelImagesAction"
+			method="populatePage">
+			<result name="success">\WEB-INF\jsp\AdminManageHotelImages.jsp</result>
+		</action>
+		<action name="UploadImage" class="com.travel.action.AdminManageHotelImagesAction"
+			method="uploadImage">
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="i18n" />
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/jpeg,image/gif,image/png,image/x-png,image/pjpeg,image/jpg,image/JPG,image/JPEG</param>
+			</interceptor-ref>
+			<interceptor-ref name="loggedUserStack" />
+			<result name="input">\WEB-INF\jsp\AdminManageHotelImages.jsp</result>
+			<result name="success">\WEB-INF\jsp\AdminManageHotelImages.jsp</result>
+		</action>
+
+		<action name="getAddressOfHotel" class="com.travel.action.AdminManageHotelImagesAction"
+			method="getAddressOfHotel">
+		</action>
+
+		<action name="*Hotels" class="com.travel.action.AdminManageHotelsAction"
+			method="{1}Hotels">
+		</action>
+
+		<action name="ManageTourInformation" class="com.travel.action.AdminManageToursAction">
+			<interceptor-ref name="loggedUserStack" />
+			<result>\WEB-INF\jsp\AdminManageTours.jsp</result>
+		</action>
+		<action name="*TourInformation" class="com.travel.action.AdminManageToursAction"
+			method="{1}TourInformation">
+			<interceptor-ref name="loggedUserStack" />
+			<result>\WEB-INF\jsp\AdminAddTours.jsp</result>
+		</action>
+		<action name="*Tours" class="com.travel.action.AdminManageToursAction"
+			method="{1}Tours">
+		</action>
+
+		<action name="ManageTourDestination"
+			class="com.travel.action.AdminManageTourDestinationAction">
+			<interceptor-ref name="loggedUserStack" />
+			<result>\WEB-INF\jsp\AdminManageTourDestination.jsp</result>
+		</action>
+		<action name="*TourDestination"
+			class="com.travel.action.AdminManageTourDestinationAction" method="{1}TourDestination">
+			<result>\WEB-INF\jsp\AdminAddTourDestination.jsp</result>
+		</action>
+
+		<action name="TourImageUpload" class="com.travel.action.AdminManageTourImagesAction"
+			method="populatePage">
+			<interceptor-ref name="loggedUserStack" />
+			<result>\WEB-INF\jsp\AdminManageTourImages.jsp</result>
+		</action>
+		<action name="UploadTourImage" class="com.travel.action.AdminManageTourImagesAction"
+			method="uploadImage">
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="i18n" />
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/jpeg,image/gif,image/png,image/x-png,image/pjpeg,image/jpg,image/JPG,image/JPEG</param>
+			</interceptor-ref>
+			<interceptor-ref name="loggedUserStack" />
+			<result name="input">\WEB-INF\jsp\AdminManageTourImages.jsp</result>
+			<result name="success">\WEB-INF\jsp\AdminManageTourImages.jsp</result>
+		</action>
+		<!--  End : This section is for admin actions -->
+
+		<!--  Start: This section is for end user activities-->
+
+		<action name="ShowTourDestinations" class="com.travel.action.ToursDestinationAction"
+			method="showAllTourDestinationInfo">
+			<result>\WEB-INF\jsp\ToursDestinationsPage.jsp</result>
+		</action>
+
+
+		<action name="DisplayTourDetails" class="com.travel.action.ToursPageAction"
+			method="displayTourDetails">
+			<result>\WEB-INF\jsp\ToursDetailsPage.jsp</result>
+		</action>
+
+		<action name="showToursInfo" class="com.travel.action.ToursPageAction">
+			<result>\WEB-INF\jsp\ToursPage.jsp</result>
+		</action>
+		<action name="*ToursInfo" class="com.travel.action.ToursPageAction"
+			method="{1}ToursInfo">
+			<result name="USERLOGIN">\WEB-INF\jsp\UserLogin.jsp</result>
+		</action>
+
+
+		<action name="showHotelsInfo" class="com.travel.action.HotelsPageAction">
+			<result>\WEB-INF\jsp\HotelsPage.jsp</result>
+		</action>
+		<action name="DisplayHotelsDetails" class="com.travel.action.HotelsPageAction"
+			method="displayHotelsDetails">
+			<result>\WEB-INF\jsp\HotelsDetailsPage.jsp</result>
+		</action>
+		<action name="*HotelsInfo" class="com.travel.action.HotelsPageAction"
+			method="{1}HotelsInfo">
+			<result name="USERLOGIN">\WEB-INF\jsp\UserLogin.jsp</result>
+		</action>
+
+		<action name="*UserRegistration" class="com.travel.action.UserRegistrationAction"
+			method="{1}UserRegistration">
+			<result>\WEB-INF\jsp\UserRegistration.jsp</result>
+			<result name="input">\WEB-INF\jsp\UserRegistration.jsp</result>
+			<result name="TOURBOOKED" type="redirect-action">
+				<param name="actionName">DisplayTourDetails</param>
+			</result>
+			<result name="HOTELBOOKED" type="redirect-action">
+				<param name="actionName">DisplayHotelsDetails</param>
+			</result>			
+		</action>
+
+		<action name="logout">
+			<result>\logout.jsp</result>
+		</action>
+	</package>
+
+</struts>

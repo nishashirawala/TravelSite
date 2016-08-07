@@ -1,0 +1,6 @@
+
+USE `EMS`;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS app_user;
+
+commit;

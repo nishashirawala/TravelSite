@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="my-default" location="10,25" size="525,875">
+    <action name="login" location="310,58" size="150,40" />
+    <action name="homepage" location="310,162" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="Home.jsp" />
+      </result>
+    </action>
+    <action name="HotTours" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="HotTours.jsp" />
+      </result>
+    </action>
+    <action name="AdminHome" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminHome.jsp" />
+      </result>
+    </action>
+    <action name="ManageHotels" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminManageHotels.jsp" />
+      </result>
+    </action>
+    <action name="AddHotelInformation" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminAddHotels.jsp" />
+      </result>
+    </action>
+    <action name="*InformationForHotel" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminAddHotels.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="AdminAddHotels.jsp" />
+      </result>
+    </action>
+    <action name="ImageUploadAction" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminManageHotelImages.jsp" />
+      </result>
+    </action>
+    <action name="UploadImage" location="0,0" size="0,0">
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="AdminManageHotelImages.jsp" />
+      </result>
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminManageHotelImages.jsp" />
+      </result>
+    </action>
+    <action name="getAddressOfHotel" location="0,0" size="0,0" />
+    <action name="*Hotels" location="0,0" size="0,0" />
+    <action name="ManageTourInformation" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminManageTours.jsp" />
+      </result>
+    </action>
+    <action name="*TourInformation" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminAddTours.jsp" />
+      </result>
+    </action>
+    <action name="*Tours" location="0,0" size="0,0" />
+    <action name="ManageTourDestination" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminManageTourDestination.jsp" />
+      </result>
+    </action>
+    <action name="*TourDestination" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminAddTourDestination.jsp" />
+      </result>
+    </action>
+    <action name="TourImageUpload" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminManageTourImages.jsp" />
+      </result>
+    </action>
+    <action name="UploadTourImage" location="0,0" size="0,0">
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="AdminManageTourImages.jsp" />
+      </result>
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="AdminManageTourImages.jsp" />
+      </result>
+    </action>
+    <action name="ShowTourDestinations" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="ToursDestinationsPage.jsp" />
+      </result>
+    </action>
+    <action name="DisplayTourDetails" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="ToursDetailsPage.jsp" />
+      </result>
+    </action>
+    <action name="showToursInfo" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="ToursPage.jsp" />
+      </result>
+    </action>
+    <action name="*ToursInfo" location="0,0" size="0,0">
+      <result name="USERLOGIN">
+        <resourceEdge source="USERLOGIN" routing="0" target="UserLogin.jsp" />
+      </result>
+    </action>
+    <action name="showHotelsInfo" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="HotelsPage.jsp" />
+      </result>
+    </action>
+    <action name="DisplayHotelsDetails" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="HotelsDetailsPage.jsp" />
+      </result>
+    </action>
+    <action name="*HotelsInfo" location="0,0" size="0,0">
+      <result name="USERLOGIN">
+        <resourceEdge source="USERLOGIN" routing="0" target="UserLogin.jsp" />
+      </result>
+    </action>
+    <action name="*UserRegistration" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="UserRegistration.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="UserRegistration.jsp" />
+      </result>
+      <result name="TOURBOOKED" />
+      <result name="HOTELBOOKED" />
+    </action>
+    <action name="logout" location="310,337" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="logout.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="home.jsp" path="\WEB-INF\jsp\home.jsp" location="601,150" size="150,55" />
+  <webResource name="logout.jsp" path="\logout.jsp" location="590,325" size="150,55" />
+  <webResource name="ExpenseCategory.jsp" path="\WEB-INF\jsp\ExpenseCategory.jsp" location="571,500" size="150,55" />
+  <webResource name="DailyExpense.jsp" path="\WEB-INF\jsp\DailyExpense.jsp" location="582,675" size="150,55" />
+  <webResource name="HotTours.jsp" path="\WEB-INF\jsp\HotTours.jsp" location="0,0" size="0,0" />
+  <webResource name="Home.jsp" path="\WEB-INF\jsp\Home.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminHome.jsp" path="\WEB-INF\jsp\AdminHome.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminManageHotels.jsp" path="\WEB-INF\jsp\AdminManageHotels.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminAddImages.jsp" path="\WEB-INF\jsp\AdminAddImages.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminAddHotels.jsp" path="\WEB-INF\jsp\AdminAddHotels.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminManageHotelImages.jsp" path="\WEB-INF\jsp\AdminManageHotelImages.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminManageTours.jsp" path="\WEB-INF\jsp\AdminManageTours.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminManageTourDestination.jsp" path="\WEB-INF\jsp\AdminManageTourDestination.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminAddTourDestination.jsp" path="\WEB-INF\jsp\AdminAddTourDestination.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminAddTours.jsp" path="\WEB-INF\jsp\AdminAddTours.jsp" location="0,0" size="0,0" />
+  <webResource name="AdminManageTourImages.jsp" path="\WEB-INF\jsp\AdminManageTourImages.jsp" location="0,0" size="0,0" />
+  <webResource name="ToursPage.jsp" path="\WEB-INF\jsp\ToursPage.jsp" location="0,0" size="0,0" />
+  <webResource name="ToursDetailsPage.jsp" path="\WEB-INF\jsp\ToursDetailsPage.jsp" location="0,0" size="0,0" />
+  <webResource name="HotelsPage.jsp" path="\WEB-INF\jsp\HotelsPage.jsp" location="0,0" size="0,0" />
+  <webResource name="UserRegistration.jsp" path="\WEB-INF\jsp\UserRegistration.jsp" location="0,0" size="0,0" />
+  <webResource name="UserLogin.jsp" path="\WEB-INF\jsp\UserLogin.jsp" location="0,0" size="0,0" />
+  <webResource name="HotelsDetailsPage.jsp" path="\WEB-INF\jsp\HotelsDetailsPage.jsp" location="0,0" size="0,0" />
+  <webResource name="ToursDestinationsPage.jsp" path="\WEB-INF\jsp\ToursDestinationsPage.jsp" location="0,0" size="0,0" />
+  <include file="struts-default.xml" location="878,10" size="150,30" />
+</Struts2Diagram>
+
